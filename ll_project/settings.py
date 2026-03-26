@@ -35,7 +35,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -124,25 +126,37 @@ LOGIN_URL = 'accounts:login'
 
 # Настройки Platform.sh.
 
-from platformshconfig import Config
-config = Config()
-if config.is_valid_platform():
-    ALLOWED_HOSTS.append('.platformsh.site')
+# from platformshconfig import Config
+# config = Config()
+# if config.is_valid_platform():
+#     ALLOWED_HOSTS.append('.platformsh.site')
 
-    if config.appDir:
-        STATIC_ROOT = Path(config.appDir) / 'static'
-    if config.projectEntropy:
-        SECRET_KEY = config.projectEntropy
+#     if config.appDir:
+#         STATIC_ROOT = Path(config.appDir) / 'static'
+#     if config.projectEntropy:
+#         SECRET_KEY = config.projectEntropy
 
-    if not config.in_build():
-        db_settings = config.credentials(' database' )
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.postgresql',
-                'NAME': db_settings['path'],
-                'USER': db_settings['username'],
-                'PASSWORD': db_settings['password'],
-                'HOST': db_settings['host'],
-                'PORT': db_settings['port'],
-            },
-        }
+#     if not config.in_build():
+#         db_settings = config.credentials(' database' )
+#         DATABASES = {
+#             'default': {
+#                 'ENGINE': 'django.db.backends.postgresql',
+#                 'NAME': db_settings['path'],
+#                 'USER': db_settings['username'],
+#                 'PASSWORD': db_settings['password'],
+#                 'HOST': db_settings['host'],
+#                 'PORT': db_settings['port'],
+#             },
+#         }
+
+
+# Настройки для Timeweb
+import os
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+# Для продакшена на Timeweb
+if not DEBUG:
+    ALLOWED_HOSTS = ['*']  # Временно, потом замените на реальный домен
