@@ -160,5 +160,5 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Для продакшена на Timeweb
-if not DEBUG:
-    ALLOWED_HOSTS = ['aleksejsurov28-blip-learning-log-eb0d.twc1.net']  # Временно, потом замените на реальный домен
+
+ALLOWED_HOSTS = ['aleksejsurov28-blip-learning-log-eb0d.twc1.net']  # Временно, потом замените на реальный домен
