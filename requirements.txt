@@ -3,3 +3,4 @@ Django==4.2.28
 django-bootstrap5==25.2
 sqlparse==0.5.5
 tzdata==2025.3
+echo "whitenoise==6.7.0"
