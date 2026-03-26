@@ -165,3 +165,13 @@ ALLOWED_HOSTS = ['aleksejsurov28-blip-learning-log-eb0d.twc1.net']
 
 # CSRF защита
 CSRF_TRUSTED_ORIGINS = ['https://aleksejsurov28-blip-learning-log-eb0d.twc1.net']
+
+
+import subprocess
+import sys
+
+if not DEBUG:
+    try:
+        subprocess.run([sys.executable, 'manage.py', 'migrate'], check=True)
+    except subprocess.CalledProcessError:
+        pass
