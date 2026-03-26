@@ -161,4 +161,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Для продакшена на Timeweb
 
-ALLOWED_HOSTS = ['aleksejsurov28-blip-learning-log-eb0d.twc1.net']  # Временно, потом замените на реальный домен
+ALLOWED_HOSTS = ['aleksejsurov28-blip-learning-log-eb0d.twc1.net']  
+
+# CSRF защита
+CSRF_TRUSTED_ORIGINS = ['https://aleksejsurov28-blip-learning-log-eb0d.twc1.net']
